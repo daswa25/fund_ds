@@ -1,0 +1,214 @@
+####################
+PATH CONVERTERS
+####################
+
+<INT:ARGUMENT-NAME>-It filters according to their datatype and to avoid default (data-type) string
+
+More views
+	Create a dictionary for the month
+	and call it views and url
+####################
+REDIRECTS
+####################
+
+import HttpResponseRedirect
+ list(variable-name.keys())
+ -------------------------------------------------
+ Use List or Dictionary data type in variable Name
+ --------------------------------------------------
+ HttpResponseRedirect("app-path/redirect-variable")
+
+#####################
+REVERSE NAME AND URLS
+#####################
+
+The path for the redirection is hardcoded it should be dynamic. 
+In this case 
+reverse("name of your path in Urls.py",args=[list(var-name.keys())])
+
+
+########################
+TEMPLATES
+########################
+
+1)Understanding templates
+2)Django Template Language Features
+3)Working with static Files(css,js,images,font)
+
+create a subfolder templates inside a my app
+<Your-app-folder> -> templates/<subfolder>/<html-file>
+Inside a template 
+In view import Django.template.loader import render_to_string.
+
+Use 'DIRS':[" BASE_DIR /<Your-App>/<Template>"]
+It is used for global calls
+'APP_DIR':TRUE
+It is for Specific Apps
+
+#######
+RENDER
+#######
+
+You can use shortcut function render(request,'<path-to-html-file>')
+for optimization we can use this  render() it's a default Django function
+#############################
+Django Template Language(DTL)
+#############################
+
+Standard Html syntax
+Special DTL syntax	
+Dynamic Html Page
+
+	1)view->render(request,url,{})
+	2)html->{{<key> or <value>}}
+	3)Filters visit Django Template Filters
+	The DJanngo Documentation have filter which I previously mentioned
+	/*SO REFER DOCUMENTATION/*
+####################
+TEMPLATE INHERITANCE
+####################
+
+[BASE_DIR/TEMPLATES]
+{% extends "base.html" %}
+{% block page_title%}{% end block %}
+
+####################
+LOAD STATIC FILES
+###################
+
+Static files to load css,js and images
+check the static files are properly imported or installed in  settings.py folder
+
+static-file/css || js || images	
+Add global static files in settings.py BASE_DIR /STATIC 
+
+Design with bootstrap Template and view is over
+
+#####################
+BUilding a blog
+#####################
+
+1)create our blog and app
+2)add url & views
+3)template & static files
+
+######################
+BLOG URL AND VIEWS
+#####################
+
+Our blog app has
+/
+/Posts
+/posts/my-first-post or <slug>
+slug is seo-friendly
+
+###############################
+Special syntax in view for blog
+###############################
+
+python function sort
+sort()
+sort[-3:]-> it will sort the list according the last three keys.
+to access the title
+{{post.title }}
+|add for image or css adding
+check out for date function
+
+########################
+DATA AND MODELS
+######################
+
+Data,DataBases&Models
+
+create an app
+create a db.sqllite3
+open model
+create a class(models.Models)
+variable=models.charfield()
+variable=models.intfield()
+
+make migrations
+migrate to project 
+The migrate take place for whole project.
+#############
+Python-shell
+#############
+py manage.py shell
+The shell technique is used for basic query understanding process
+from <app-name>.models import <class-name>
+
+	variable=class(field1,field2)
+	to update the data
+	variable.save()
+
+	to get all entries
+	<class-name>.objects.all()
+	
+
+	validators
+	null=true
+	default=false
+	--------------------------------------------------------------
+	Migrations should be executed every field change in the models
+	--------------------------------------------------------------
+
+	-----UPDATE QUERY---
+	update particular field
+	variable_name=<class-name>.objects.all()[<index>].<field-name>
+	variable_name='<your-content>'
+	variable_name.save()
+	save can be done to create a new field nor update the existing value
+	-----Delete Query----
+	Delete the entire query
+	variable_name=<class-name>.objects.all()[<index>]
+	variable_name.delete()
+	------create query-----
+[<class-name>.objects.create(<fields>)]
+
+It is to create a new data in the table
+<class-name>.objects.get(<field-name>)
+Here we should enter unique field set
+<class-name>.objects.filter(<field-name> and <modifiers>)
+refer modifiers for django-making queries documentation field
+########
+Or and And operator in query
+########
+from Django.db.models import Q
+<class-name>.objects.filter(Q(<field-name> and <modifiers>)|Q(<field-name> and <modifiers>),<field-name> and <modifiers>))
+while using the q the The and can't be positioned first ,it will throw a position error ,always the or query the and conditions will come.
+###############
+AGGREGATE & ORDERING
+###############
+avg,min,max
+from Django.db.models import avg
+  books=book.objects.all().order_by("-title")
+    total_book_count= books.count()
+    average_rating=books.aggregate(Avg("rating"))
+
+these are aggregation method and there are many query set and import q method
+###################
+RELATION SHIP MODELS
+###################
+One to one
+Many to One
+Many to Many
+Example 
+
+models.foreignKey(<parent-table>,Table specifiers)
+
+for me related name in query in foreign key working
+-----------------------------------------------------
+ONE TO MANY
+<model-class>.<related-name>.all()
+-----------------------------------------------------
+ONE TO ONE 
+<model-class>.objects.all[0].author
+this is to access from the foreign table to child table.
+-----------------------------------------------------
+MANY TO MANY 
+A country can have multiple published books or book can be published in multiple countries
+if you were using many to many relation ship there is a class which is for add() it adds the entries to the table.
+----------------------------------------------------	
+
+
+
